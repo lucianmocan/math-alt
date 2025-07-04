@@ -1,0 +1,42 @@
+// Float Algebra Module - Operations on real numbers
+// This module provides algebraic operations specifically for floating-point numbers
+
+// Basic arithmetic operations for floats
+fn add(a: float, b: float) -> float {
+    // Addition: combines two floating-point numbers
+    // Mathematical principle: a + b = b + a (commutative property)
+    // Note: floating-point addition can have precision errors
+    return a + b;
+}
+
+fn subtract(a: float, b: float) -> float {
+    // Subtraction: finds the difference between two floats
+    // Note: subtraction is NOT commutative (a - b ≠ b - a)
+    // Precision can be lost with very different magnitudes
+    return a - b;
+}
+
+fn multiply(a: float, b: float) -> float {
+    // Multiplication: product of two floats
+    // Mathematical principle: a × b = b × a (commutative property)
+    // Can result in overflow (infinity) or underflow (zero)
+    return a * b;
+}
+
+fn divide(a: float, b: float) -> float {
+    // Division: true mathematical division
+    // Unlike integer division, this gives exact mathematical result
+    // Example: 7.0 / 2.0 = 3.5
+    
+    // Assert that we're not dividing by zero
+    // Use epsilon for floating-point comparison
+    assert(abs(b) > 1e-10, "Division by zero is undefined");
+    
+    return a / b;
+}
+
+fn square(x: float) -> float {
+    // Special case of power: x^2
+    // More efficient than calling power(x, 2.0)
+    return x * x;
+}

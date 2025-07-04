@@ -1,0 +1,120 @@
+// Integer Algebra Module - Operations on whole numbers
+// This module provides algebraic operations specifically for integers
+
+// Basic arithmetic operations for integers
+fn add(a: int, b: int) -> int {
+    // Addition: combines two integers
+    // Mathematical principle: a + b = b + a (commutative property)
+    // Integer addition is exact (no precision loss)
+    return a + b;
+}
+
+fn subtract(a: int, b: int) -> int {
+    // Subtraction: finds the difference between two integers
+    // Note: subtraction is NOT commutative (a - b ≠ b - a)
+    // Result is always exact for integers
+    return a - b;
+}
+
+fn multiply(a: int, b: int) -> int {
+    // Multiplication: repeated addition
+    // Mathematical principle: a × b = b × a (commutative property)
+    // Watch out for integer overflow with large numbers!
+    return a * b;
+}
+
+fn divide(a: int, b: int) -> int {
+    // Integer division: quotient only (truncates toward zero)
+    // Important: this is different from mathematical division!
+    // Example: 7 / 2 = 3 (not 3.5)
+    
+    // Assert that we're not dividing by zero
+    assert(b != 0, "Division by zero is undefined");
+    
+    return a / b;
+}
+
+fn modulo(a: int, b: int) -> int {
+    // Modulo: remainder after division
+    // Mathematical principle: a = (a/b) * b + (a % b)
+    // Example: 7 % 2 = 1, because 7 = 3 * 2 + 1
+    
+    // Assert that we're not dividing by zero
+    assert(b != 0, "Modulo by zero is undefined");
+    
+    return a % b;
+}
+
+// Power operations for integers
+fn power(base: int, exponent: int) -> int {
+    // Integer exponentiation: base^exponent
+    // Only works for non-negative exponents to keep result as integer
+    // Example: 2^3 = 8, 5^2 = 25
+    
+    // Assert that exponent is non-negative
+    assert(exponent >= 0, "Negative exponents would result in fractions");
+    
+    if (exponent == 0) {
+        return 1;  // Any number to the power of 0 is 1
+    }
+    
+    // Use repeated multiplication for simplicity
+    let result: int = 1;
+    let i: int = 0;
+    while (i < exponent) {
+        result = result * base;
+        i = i + 1;
+    }
+    return result;
+}
+
+fn square(x: int) -> int {
+    // Special case of power: x^2
+    // Used frequently in algebra, so we make it a separate function
+    // Always positive result (except for 0)
+    return x * x;
+}
+
+fn absolute(x: int) -> int {
+    // Absolute value: distance from zero
+    // Mathematical principle: |x| = x if x >= 0, |x| = -x if x < 0
+    if (x < 0) {
+        return -x;
+    }
+    return x;
+}
+
+// Greatest Common Divisor (GCD)
+fn gcd(a: int, b: int) -> int {
+    // Euclidean algorithm for finding GCD
+    // Mathematical principle: gcd(a,b) = gcd(b, a mod b)
+    // This is fundamental for fraction simplification
+    let x: int = absolute(a);
+    let y: int = absolute(b);
+    
+    while (y != 0) {
+        let temp: int = y;
+        y = x % y;
+        x = temp;
+    }
+    return x;
+}
+
+// Least Common Multiple (LCM)
+fn lcm(a: int, b: int) -> int {
+    // LCM using the relationship: lcm(a,b) = |a*b| / gcd(a,b)
+    // Useful for adding fractions
+    if (a == 0 || b == 0) {
+        return 0;
+    }
+    return absolute(a * b) / gcd(a, b);
+}
+
+
+main {
+    // TEST add
+    assert(add(2, 3) == 5, "2 + 3 should equal 5.");
+
+    // TEST substract
+    assert(subtract(2, 3) == -1, "2 -3 should equal -1.");
+}
