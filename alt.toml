@@ -3,7 +3,4 @@ name = "math-alt"
 version = "0.1.0"
 description = "A simple math library"
 
-[modules]
-algebra = "algebra"
-
 [dependencies]
