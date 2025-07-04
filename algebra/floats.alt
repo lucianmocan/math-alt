@@ -30,7 +30,7 @@ fn divide(a: float, b: float) -> float {
     
     // Assert that we're not dividing by zero
     // Use epsilon for floating-point comparison
-    assert(abs(b) > 1e-10, "Division by zero is undefined");
+    assert(abs(b) > 0, "Division by zero is undefined");
     
     return a / b;
 }
